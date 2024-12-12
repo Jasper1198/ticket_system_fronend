@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seats</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .btn {
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 3px;
+            text-align: center;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Choose Your Seat</h2>
+        <div id="seats-container"></div>
+    </div>
+    <script>
+        function getQueryParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+        function generateSeats() {
+            const seatsContainer = document.getElementById('seats-container');
+            seatsContainer.innerHTML = '';
+            for (let i = 1; i <= 100; i++) {
+                const seat = document.createElement('button');
+                seat.textContent = `Seat ${i}`;
+                seat.className = 'btn';
+                seat.onclick = () => bookSeat(i);
+                seatsContainer.appendChild(seat);
+            }
+        }
+        function bookSeat(seatNumber) {
+            if (seatNumber % 5 === 0) {
+                alert('Sorry, this seat is full.');
+            } else {
+                window.location.href = `payment.html?seat=${seatNumber}`;
+            }
+        }
+        generateSeats();
+    </script>
+</body>
+</html>
